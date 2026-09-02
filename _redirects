@@ -1,0 +1,29 @@
+# Cloudflare Pages redirects — old WordPress URLs to their new equivalents.
+# These are true 301s handled at the edge, which is what Google wants to see.
+# Format: <from> <to> <status>.  A trailing /* matches everything beneath.
+
+# The nine individual service pages all fold into the services page
+/car-services/*         /services.html    301
+/car-services           /services.html    301
+
+# Main pages
+/services               /services.html    301
+/about-us               /about.html       301
+/contacts               /contact.html     301
+/booking-form           /contact.html     301
+/faq                    /#faq             301
+/testimonial            /#reviews         301
+
+# Retired sections with no direct equivalent
+/gallery/*              /about.html       301
+/gallery                /about.html       301
+/gallery-of-*           /about.html       301
+/pricing-coupons        /services.html    301
+/shop/*                 /services.html    301
+/shop                   /services.html    301
+/blog/*                 /                 301
+/blog                   /                 301
+/cart                   /                 301
+/checkout               /                 301
+/my-account             /                 301
+/sample-page            /                 301

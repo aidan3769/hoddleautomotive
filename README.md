@@ -62,9 +62,12 @@ wanted. It is not linked from any page.
 
 ## Deployment
 
-Hosted on **GitHub Pages** behind **Cloudflare**, replacing a live WordPress site on
-shared hosting. That server also handles the client's email, so the switchover has real
-failure modes.
+Hosted on **Cloudflare Pages**, building from this GitHub repo, replacing a live
+WordPress site on shared hosting. That server also handles the client's email, so the
+switchover has real failure modes.
+
+`_redirects` maps the old WordPress URLs to their new equivalents as 301s. Cloudflare
+Pages reads it automatically from the repo root — no dashboard setup.
 
 **Read [MIGRATION.md](MIGRATION.md) before touching DNS.** It covers preserving the mail
 records, the SPF change, the Cloudflare SSL mode that otherwise causes a redirect loop,

@@ -49,7 +49,34 @@ Two specific traps:
 
 ---
 
-## 2. GitHub Pages
+## 2. Cloudflare Pages
+
+Hosting is **Cloudflare Pages**, building from the GitHub repo
+`aidan3769/hoddleautomotive`. GitHub is source control only — it does not serve the site.
+
+Set up: Cloudflare dashboard → **Workers & Pages → Create → Pages → Connect to Git**,
+pick the repo, and leave the build settings empty (no build command, output directory
+`/`). This is plain static HTML with no build step. Every push to `main` redeploys
+automatically.
+
+The preview lands at `https://<project>.pages.dev`, served **at the domain root** — not
+in a subfolder — so every path behaves exactly as it will in production. Test there
+before touching DNS.
+
+Attaching the domain: in the Pages project, **Custom domains → Set up a custom domain**,
+enter `hoddleautomotive.com.au`. Because the domain is already in this Cloudflare
+account, the DNS record is created automatically. Repeat for `www` if wanted.
+
+This replaces the GitHub Pages route entirely:
+
+- **No A records to add.** Skip the `185.199.x.x` addresses in section 3 — Cloudflare
+  Pages binds the domain itself.
+- **`CNAME.add-at-cutover` is now unused.** It was a GitHub Pages mechanism. Harmless to
+  leave, but it does nothing here and can be deleted.
+- SSL is handled by Cloudflare end to end, so the `Full` vs `Flexible` trap does not
+  apply — though `Full` remains the correct setting for the zone.
+
+## 2b. (Not used) GitHub Pages
 
 Repo: `aidan3769/hoddleautomotive`. Push and enable Pages **before** any DNS change. The
 site then previews at <https://aidan3769.github.io/hoddleautomotive/>, where the whole
@@ -98,21 +125,23 @@ are switched. Then in repo **Settings → Pages** confirm the custom domain read
 Google has ~25 URLs from the WordPress site indexed. Without redirects each becomes a
 404 and its search ranking is lost. This is handled in two layers.
 
-**Layer one — already in the repo, works automatically.** Each old URL exists as a
-directory containing an `index.html` that redirects to the new page (`services/`,
-`about-us/`, `contacts/`, `car-services/brakes/`, and so on — 24 in total). GitHub Pages
-serves these, so the redirects work the moment the site goes live, with no dashboard
-configuration. All 24 were tested end to end.
+**Primary: `_redirects`.** Cloudflare Pages reads this file from the repo root and issues
+real 301s at the edge — no dashboard configuration, versioned with the code. This is the
+mechanism that matters, and it is the reason `cloudflare-redirects.csv` (for the separate
+Bulk Redirects product) is no longer needed.
 
-**Layer two — optional but better for SEO.** Import `cloudflare-redirects.csv` under
-**Cloudflare → Bulk Redirects**: create a list, upload the CSV, attach it to a Bulk
-Redirect Rule. These are true 301s served at the edge, which Google treats more
-decisively than the meta-refresh stubs and which never reach GitHub at all. Cloudflare's
-free plan allows 20; the CSV uses 16, with subpath matching collapsing the nine
-`/car-services/*` pages into one row.
+**Fallback: the 24 stub directories.** Each old URL also exists as a folder containing an
+`index.html` with a meta-refresh to the new page. These were written for GitHub Pages,
+which has no `_redirects` support. They still work anywhere and cost 9.5 KB total.
 
-The two layers do not conflict — Cloudflare intercepts first when configured, and the
-in-repo stubs are the fallback if a rule is ever removed.
+Cloudflare Pages serves matching static files before consulting `_redirects`, so where
+both exist the stub is likely to answer first — meaning a meta-refresh rather than a 301.
+Both send the visitor to the right page; the 301 is simply cleaner for search engines.
+If a tidier repo and guaranteed 301s are preferred, delete the 24 stub directories and
+let `_redirects` do the work alone.
+
+`404.html` catches anything missed — Cloudflare Pages serves it for unmatched paths, in
+the site's own styling, with links back to the main pages and the phone number.
 
 `404.html` catches anything missed, in the site's own styling, with links back to the
 main pages and the phone number.
