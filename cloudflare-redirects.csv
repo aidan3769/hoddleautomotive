@@ -1,0 +1,17 @@
+source,target,status,preserve_query_string,subpath_matching,preserve_path_suffix
+https://hoddleautomotive.com.au/services/,https://hoddleautomotive.com.au/services.html,301,false,false,false
+https://hoddleautomotive.com.au/car-services/,https://hoddleautomotive.com.au/services.html,301,false,true,false
+https://hoddleautomotive.com.au/about-us/,https://hoddleautomotive.com.au/about.html,301,false,false,false
+https://hoddleautomotive.com.au/contacts/,https://hoddleautomotive.com.au/contact.html,301,false,false,false
+https://hoddleautomotive.com.au/booking-form/,https://hoddleautomotive.com.au/contact.html,301,false,false,false
+https://hoddleautomotive.com.au/faq/,https://hoddleautomotive.com.au/,301,false,false,false
+https://hoddleautomotive.com.au/gallery/,https://hoddleautomotive.com.au/about.html,301,false,true,false
+https://hoddleautomotive.com.au/gallery-of-%d1%81omparisons/,https://hoddleautomotive.com.au/about.html,301,false,false,false
+https://hoddleautomotive.com.au/pricing-coupons/,https://hoddleautomotive.com.au/services.html,301,false,false,false
+https://hoddleautomotive.com.au/shop/,https://hoddleautomotive.com.au/services.html,301,false,true,false
+https://hoddleautomotive.com.au/testimonial/,https://hoddleautomotive.com.au/,301,false,true,false
+https://hoddleautomotive.com.au/blog/,https://hoddleautomotive.com.au/,301,false,true,false
+https://hoddleautomotive.com.au/cart/,https://hoddleautomotive.com.au/,301,false,false,false
+https://hoddleautomotive.com.au/checkout/,https://hoddleautomotive.com.au/,301,false,false,false
+https://hoddleautomotive.com.au/my-account/,https://hoddleautomotive.com.au/,301,false,false,false
+https://hoddleautomotive.com.au/sample-page/,https://hoddleautomotive.com.au/,301,false,false,false

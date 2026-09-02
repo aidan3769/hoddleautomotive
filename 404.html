@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found — Hoddle Automotive</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" type="image/webp" href="/favicon.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    .nf-wrap {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+      background: var(--bg-soft);
+    }
+    .nf-inner { max-width: 620px; }
+    .nf-logo { height: 90px; margin: 0 auto 34px; width: auto; }
+    .nf-code {
+      font-family: var(--font-head);
+      font-size: clamp(64px, 12vw, 104px);
+      font-weight: 700;
+      line-height: 1;
+      color: var(--cyan);
+      letter-spacing: -0.04em;
+    }
+    .nf-inner h1 {
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: 600;
+      margin: 10px 0 14px;
+    }
+    .nf-inner p {
+      font-size: 17px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+    .nf-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 36px;
+    }
+    .nf-links {
+      border-top: 1px solid var(--border);
+      padding-top: 26px;
+      display: flex;
+      gap: 8px 26px;
+      justify-content: center;
+      flex-wrap: wrap;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .nf-links a { color: var(--muted); transition: color 0.2s; }
+    .nf-links a:hover { color: var(--cyan); }
+  </style>
+</head>
+<body>
+  <div class="nf-wrap">
+    <div class="nf-inner">
+      <a href="/"><img src="/logo.webp" alt="Hoddle Automotive" class="nf-logo" /></a>
+
+      <div class="nf-code">404</div>
+      <h1>We couldn’t find that page</h1>
+      <p>The page may have moved when we rebuilt the site. Try the links below, or give us a call on <a href="tel:0383834139" class="text-cyan">03 8383 4139</a> — we’re happy to help.</p>
+
+      <div class="nf-actions">
+        <a href="/" class="btn btn-primary btn-lg">Back to Home</a>
+        <a href="/contact.html" class="btn btn-outline btn-lg">Book an Appointment</a>
+      </div>
+
+      <nav class="nf-links">
+        <a href="/services.html">Services</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/location.html">Location</a>
+      </nav>
+    </div>
+  </div>
+</body>
+</html>
