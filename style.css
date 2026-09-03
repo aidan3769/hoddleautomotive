@@ -231,6 +231,7 @@ h1, h2, h3 {
   display: flex;
   align-items: center;
   gap: 6px;
+  white-space: nowrap;
   font-size: 15px;
   font-weight: 700;
   color: var(--text);
@@ -1395,6 +1396,9 @@ h1, h2, h3 {
   .transport-grid { grid-template-columns: 1fr; }
   .hero-exp { right: 24px; bottom: 24px; }
   .contact-cards-row { grid-template-columns: 1fr; }
+  /* Between the hamburger breakpoint and here the bar is too tight for the
+     phone number as well as five links — the top bar already carries it. */
+  .nav-phone { display: none; }
   .topbar-hours { display: none; }
   .topbar-inner { justify-content: center; }
 }
@@ -1450,9 +1454,6 @@ h1, h2, h3 {
   padding: 100px 0;
   background: var(--bg-soft);
 }
-/* Reviews and the About teaser share the soft background, so they need a
-   seam between them. */
-#reviews:not([hidden]) + .about-section { border-top: 1px solid var(--border); }
 .google-g { flex-shrink: 0; }
 .reviews-summary {
   display: inline-flex;
@@ -1542,4 +1543,42 @@ h1, h2, h3 {
 @media (max-width: 900px) {
   .reviews-grid { grid-template-columns: 1fr; }
   .reviews-section { padding: 70px 0; }
+}
+
+/* =========================================
+   SINGLE PORTRAIT IN THE ABOUT BLOCK
+   ========================================= */
+/* The Michael photo is a tall 1:2.1 frame. Shown uncropped it would tower
+   over the text column, so it is capped to a natural 4:5 portrait with the
+   focal point held high — that keeps him in frame and trims the ceiling and
+   the front bumper, which carry the least information. */
+.about-images-single { max-width: 460px; }
+.about-img-portrait {
+  width: 100%;
+  height: auto;           /* the height="1400" attribute would otherwise
+                             override aspect-ratio below */
+  aspect-ratio: 4/5;
+  object-fit: cover;
+  object-position: center 32%;
+  border-radius: var(--radius-lg);
+  display: block;
+}
+
+/* =========================================
+   SHOPFRONT BAND
+   ========================================= */
+.shopfront-band {
+  display: block;
+  line-height: 0;
+}
+.shopfront-band img {
+  width: 100%;
+  height: clamp(280px, 42vw, 520px);
+  object-fit: cover;
+  object-position: center 26%;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .about-images-single { max-width: 380px; }
 }

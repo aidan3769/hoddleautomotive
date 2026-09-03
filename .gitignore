@@ -11,3 +11,7 @@ desktop.ini
 
 # Local tooling
 .claude/
+
+# Large source images (WebP versions are committed instead)
+Michael.png
+Frontofshop.png
