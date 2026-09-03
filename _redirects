@@ -1,44 +1,50 @@
 # Cloudflare Pages redirects — old WordPress URLs to their new equivalents.
-# True 301s handled at the edge, which is what Google wants to see.
 #
-# Every old WordPress URL ended in a trailing slash, and Cloudflare matches
-# these patterns literally — "/services" does NOT match "/services/". Both
-# forms are listed for each path, or the request falls through to the
-# redirect stub directory instead and returns 200 with a meta-refresh.
+# TWO THINGS TO KNOW BEFORE EDITING THIS FILE:
+#
+# 1. Cloudflare Pages serves pages WITHOUT the .html extension and 308s
+#    "/services.html" to "/services". So targets here must be extensionless
+#    ("/services", not "/services.html") or every redirect costs an extra hop.
+#
+# 2. Never add a rule whose source is a real page's extensionless URL.
+#    "/services  /services.html" creates an infinite loop, because Cloudflare
+#    immediately sends /services.html back to /services.
+#
+# Old WordPress URLs all ended in a trailing slash, and matching is literal,
+# so "/services/" needs its own rule — "/services" would not cover it.
 
 # The nine individual service pages all fold into the services page
-/car-services           /services.html    301
-/car-services/*         /services.html    301
+/car-services           /services    301
+/car-services/*         /services    301
 
-# Main pages
-/services               /services.html    301
-/services/              /services.html    301
-/about-us               /about.html       301
-/about-us/              /about.html       301
-/contacts               /contact.html     301
-/contacts/              /contact.html     301
-/booking-form           /contact.html     301
-/booking-form/          /contact.html     301
-/faq                    /#faq             301
-/faq/                   /#faq             301
-/testimonial            /#reviews         301
-/testimonial/*          /#reviews         301
+# Main pages  (note: no bare "/services" rule — see point 2 above)
+/services/              /services    301
+/about-us               /about       301
+/about-us/              /about       301
+/contacts               /contact     301
+/contacts/              /contact     301
+/booking-form           /contact     301
+/booking-form/          /contact     301
+/faq                    /#faq        301
+/faq/                   /#faq        301
+/testimonial            /#reviews    301
+/testimonial/*          /#reviews    301
 
 # Retired sections with no direct equivalent
-/gallery                /about.html       301
-/gallery/*              /about.html       301
-/gallery-of-*           /about.html       301
-/pricing-coupons        /services.html    301
-/pricing-coupons/       /services.html    301
-/shop                   /services.html    301
-/shop/*                 /services.html    301
-/blog                   /                 301
-/blog/*                 /                 301
-/cart                   /                 301
-/cart/                  /                 301
-/checkout               /                 301
-/checkout/              /                 301
-/my-account             /                 301
-/my-account/            /                 301
-/sample-page            /                 301
-/sample-page/           /                 301
+/gallery                /about       301
+/gallery/*              /about       301
+/gallery-of-*           /about       301
+/pricing-coupons        /services    301
+/pricing-coupons/       /services    301
+/shop                   /services    301
+/shop/*                 /services    301
+/blog                   /            301
+/blog/*                 /            301
+/cart                   /            301
+/cart/                  /            301
+/checkout               /            301
+/checkout/              /            301
+/my-account             /            301
+/my-account/            /            301
+/sample-page            /            301
+/sample-page/           /            301
