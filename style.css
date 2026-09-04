@@ -1454,6 +1454,13 @@ h1, h2, h3 {
   padding: 100px 0;
   background: var(--bg-soft);
 }
+.reviews-tagline {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.7;
+  font-family: var(--font-body);
+  margin-bottom: 4px;
+}
 .google-g { flex-shrink: 0; }
 .reviews-summary {
   display: inline-flex;
@@ -1577,6 +1584,20 @@ h1, h2, h3 {
   object-fit: cover;
   object-position: center 26%;
   display: block;
+}
+
+/* Desktop: show the shopfront photo in full, uncropped */
+@media (min-width: 901px) {
+  .shopfront-band {
+    padding: 0 24px;
+  }
+  .shopfront-band img {
+    max-width: 900px;
+    margin: 0 auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--radius-lg);
+  }
 }
 
 @media (max-width: 900px) {
