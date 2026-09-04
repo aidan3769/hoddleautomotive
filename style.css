@@ -999,6 +999,29 @@ h1, h2, h3 {
   box-shadow: 0 0 0 3px var(--cyan-mid);
 }
 .form-group textarea { resize: vertical; min-height: 110px; }
+
+/* PREFERRED DATE HINT
+   A date input draws its own hint text inside the box ("mm/dd/yyyy" or
+   "dd/mm/yyyy", depending on the visitor's browser locale) and that wording
+   can't be changed. While the field is empty and unfocused we hide it and
+   paint "day/month/year" over the top instead. Browsers without the
+   ::-webkit-datetime-edit pseudo-element keep their own hint untouched. */
+.date-field { position: relative; }
+.date-field .date-hint {
+  display: none;
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 15px;
+  font-family: var(--font-body);
+  color: var(--muted);
+  pointer-events: none;
+}
+@supports selector(::-webkit-datetime-edit) {
+  .date-field.hint-on .date-hint { display: block; }
+  .date-field.hint-on input::-webkit-datetime-edit { opacity: 0; }
+}
 .booking-form .btn { width: 100%; justify-content: center; margin-top: 6px; }
 .booking-form .btn:disabled { opacity: 0.6; cursor: not-allowed; }
 .form-note {

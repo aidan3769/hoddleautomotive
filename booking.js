@@ -63,3 +63,32 @@ if (bookingForm) {
       });
   });
 }
+
+// =========================================
+// PREFERRED DATE HINT
+//
+// The field stays a real <input type="date"> — native picker, validation and
+// an unambiguous YYYY-MM-DD value. All this does is swap the browser's own
+// locale-dependent hint text for the words "day/month/year" while the field
+// is empty and unfocused. See .date-field in style.css.
+// =========================================
+
+const dateField = document.getElementById('bf-date');
+const dateWrap  = dateField && dateField.closest('.date-field');
+
+if (dateField && dateWrap) {
+  const syncDateHint = () => {
+    const showHint = !dateField.value && document.activeElement !== dateField;
+    dateWrap.classList.toggle('hint-on', showHint);
+  };
+
+  syncDateHint();
+  ['input', 'change', 'focus', 'blur'].forEach((evt) =>
+    dateField.addEventListener(evt, syncDateHint)
+  );
+
+  // The form reset after a successful send empties the field again.
+  if (bookingForm) {
+    bookingForm.addEventListener('reset', () => setTimeout(syncDateHint, 0));
+  }
+}
