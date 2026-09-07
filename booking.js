@@ -92,3 +92,33 @@ if (dateField && dateWrap) {
     bookingForm.addEventListener('reset', () => setTimeout(syncDateHint, 0));
   }
 }
+
+// =========================================
+// VEHICLE FIELDS
+//
+// Rego and make/model are two separate boxes, sent to the template as
+// {{rego}} and {{make_model}}. They are also mirrored into a combined
+// hidden field so the template's original {{vehicle}} placeholder keeps
+// receiving both — no EmailJS template change is needed for the booking
+// email to stay complete.
+// =========================================
+
+const regoField    = document.getElementById('bf-rego');
+const makeField    = document.getElementById('bf-make-model');
+const vehicleField = document.getElementById('bf-vehicle');
+
+if (regoField && makeField && vehicleField) {
+  const syncVehicle = () => {
+    vehicleField.value = [regoField.value.trim(), makeField.value.trim()]
+      .filter(Boolean)
+      .join(' — ');
+  };
+
+  syncVehicle();
+  regoField.addEventListener('input', syncVehicle);
+  makeField.addEventListener('input', syncVehicle);
+
+  if (bookingForm) {
+    bookingForm.addEventListener('reset', () => setTimeout(syncVehicle, 0));
+  }
+}
