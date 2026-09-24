@@ -76,7 +76,7 @@ window.addEventListener('resize', () => {
 // --- Footer copyright year ---
 const copyrightEl = document.getElementById('copyright');
 if (copyrightEl) {
-  copyrightEl.textContent = '© ' + new Date().getFullYear() + ' Hoddle Automotive. All rights reserved.';
+  copyrightEl.textContent = '© ' + new Date().getFullYear() + ' Hoddle Automotive. All rights reserved. ARC AU068569';
 }
 
 // --- Fade-in on scroll ---
